@@ -1,0 +1,6 @@
+
+backend/.env
+.vscode/
+
+**/.env
+backend/.env

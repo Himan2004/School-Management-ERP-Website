@@ -1,0 +1,526 @@
+.hero {
+  position: relative;
+  overflow: visible;
+  z-index: 1;
+  padding-top: 160px;
+  padding-bottom: 180px;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url('../assets/Background hero.png') no-repeat center center;
+  background-size: 100% 100%;
+  z-index: -2;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-main);
+  opacity: 0.3;
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* Left Content */
+.hero-content {
+  z-index: 5;
+  position: relative;
+}
+
+.hero-title {
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 24px;
+  letter-spacing: -0.04em;
+}
+
+.highlight-text {
+  background: linear-gradient(135deg, #4f46e5 0%, var(--secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  display: inline-block;
+  padding-bottom: 4px;
+}
+
+.hero-description {
+  font-size: 19px;
+  line-height: 1.7;
+  color: var(--text-medium);
+  margin-bottom: 40px;
+  max-width: 500px;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.enroll-btn {
+  padding: 16px 42px;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  border-radius: 100px;
+  background: linear-gradient(135deg, #ff9b86 0%, #f76b51 100%);
+  box-shadow: 0 12px 24px -6px rgba(247, 107, 81, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+  position: relative;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  letter-spacing: 0.02em;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.enroll-btn::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%; width: 50%; height: 100%;
+  background: linear-gradient(to right, transparent, rgba(255,255,255,0.5), transparent);
+  transform: skewX(-20deg);
+  transition: 0.7s ease;
+}
+
+.enroll-btn:hover::after {
+  left: 150%;
+}
+
+.enroll-btn:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 16px 32px -8px rgba(247, 107, 81, 0.6), inset 0 1px 1px rgba(255, 255, 255, 0.4);
+}
+
+.play-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 14px;
+  padding: 10px 24px;
+  background: transparent;
+  color: #1e293b;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: -0.01em;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.play-icon-wrap {
+  width: 52px;
+  height: 52px;
+  border-radius: var(--radius-full);
+  background-color: white;
+  box-shadow: 0 8px 24px -4px rgba(0,0,0,0.12), inset 0 1px 1px rgba(255,255,255,0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary);
+  position: relative;
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.play-icon-wrap::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.6);
+  z-index: -1;
+  animation: pulse-ripple 2s infinite cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes pulse-ripple {
+  0% { transform: scale(1); opacity: 0.8; }
+  100% { transform: scale(1.6); opacity: 0; }
+}
+
+.play-icon {
+  width: 18px;
+  height: 18px;
+  transform: translateX(2px);
+}
+
+.play-btn:hover .play-icon-wrap {
+  color: white;
+  background: var(--primary);
+  transform: scale(1.08);
+  box-shadow: 0 12px 28px -4px rgba(30, 58, 95, 0.4);
+}
+
+.play-btn:hover .play-icon-wrap::before {
+  background-color: rgba(30, 58, 95, 0.4);
+}
+
+.play-btn:hover {
+  transform: translateY(-2px);
+  color: var(--primary);
+}
+
+/* Right Illustration */
+.hero-illustration {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 500px;
+  perspective: 1000px;
+}
+
+/* Student Image */
+.student-image-container {
+  position: relative;
+  width: 100%;
+  max-width: 380px;
+  aspect-ratio: 38/41;
+  border-radius: 200px 200px 0 200px;
+  overflow: hidden;
+  background: linear-gradient(135deg, #ffffff 0%, #f1f5f9 100%);
+  border: 8px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  z-index: 2;
+  transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.student-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.hero-illustration:hover .student-image-container {
+  transform: translateY(-10px) rotateY(-5deg);
+}
+
+.hero-illustration:hover .student-image {
+  transform: scale(1.05);
+}
+
+/* Floating Glass Cards */
+.floating-card {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 24px;
+  z-index: 3;
+  pointer-events: auto;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  box-shadow: 0 15px 35px -5px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease;
+}
+
+.floating-card:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 25px 45px -10px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+  z-index: 10;
+}
+
+.icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-blue {
+  background-color: #e0f2fe;
+  color: #0284c7;
+}
+
+.icon-orange {
+  background-color: #ffedd5;
+  color: #f97316;
+}
+
+.icon-purple {
+  background-color: #f3e8ff;
+  color: #a855f7;
+}
+
+.card-text {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1e293b;
+  text-align: left;
+}
+
+.card-text-stacked {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.count-num {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+  line-height: 1.1;
+}
+
+.count-label {
+  font-size: 12px;
+  font-weight: 500;
+  color: #64748b;
+}
+
+/* Card Positions (Desktop Layout) */
+.card-easy-access {
+  top: 15%;
+  left: -20px;
+}
+
+.card-students {
+  right: -30px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.card-school {
+  bottom: -15px;
+  left: 20px;
+}
+
+/* Clean Responsive Mobile Layout (<768px) */
+@media (max-width: 768px) {
+  .hero {
+    padding-top: 85px;
+    padding-bottom: 40px;
+    overflow: visible;
+  }
+
+  .hero::before {
+    background-size: cover;
+    background-position: top center;
+  }
+
+  .hero-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 18px;
+  }
+
+  .hero-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .hero-title {
+    text-align: center;
+    font-size: clamp(1.32rem, 5.2vw, 2.05rem);
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    margin-bottom: 12px;
+    padding: 0;
+    max-width: 100%;
+    word-break: keep-all;
+  }
+
+  .hero-title .highlight-text {
+    display: inline-block;
+    white-space: nowrap;
+  }
+
+  .hero-description {
+    font-size: clamp(13.5px, 3.8vw, 15px);
+    line-height: 1.55;
+    margin-bottom: 20px;
+    text-align: center;
+    max-width: 360px;
+    padding: 0 4px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+    width: 100%;
+    margin-bottom: 4px;
+  }
+
+  .enroll-btn {
+    padding: 13px 34px;
+    font-size: 14.5px;
+    font-weight: 700;
+  }
+
+  /* Scaled Illustration Group */
+  .hero-illustration {
+    height: 260px;
+    min-height: 260px;
+    width: 100%;
+    max-width: 340px;
+    margin: 6px auto 0;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    perspective: 800px;
+  }
+
+  .student-image-container {
+    width: 175px;
+    max-width: 175px;
+    aspect-ratio: 38/41;
+    border-radius: 92px 92px 0 92px;
+    border: 5px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 16px 36px -8px rgba(0, 0, 0, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
+    z-index: 2;
+  }
+
+  /* Scaled Floating Glass Cards */
+  .floating-card {
+    padding: 7px 11px;
+    border-radius: 12px;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.85);
+    box-shadow: 0 10px 24px -4px rgba(0, 0, 0, 0.09), 0 0 0 1px rgba(255, 255, 255, 0.6) inset;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 3;
+  }
+
+  .icon-box {
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+    flex-shrink: 0;
+  }
+
+  .icon-box svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .card-text {
+    font-size: 10.5px;
+    font-weight: 700;
+    line-height: 1.25;
+    white-space: nowrap;
+  }
+
+  .card-text-stacked {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .count-num {
+    font-size: 13px;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .count-label {
+    font-size: 9.5px;
+    font-weight: 500;
+    line-height: 1.1;
+    white-space: nowrap;
+  }
+
+  /* Natural Placement around Student Illustration on Mobile */
+  .card-easy-access {
+    top: 8px;
+    left: -4px;
+  }
+
+  .card-students {
+    top: 45%;
+    right: -6px;
+    transform: none;
+  }
+
+  .card-school {
+    bottom: 4px;
+    left: 8px;
+  }
+}
+
+/* Extra Small Mobile Devices (<380px, e.g., iPhone SE) */
+@media (max-width: 380px) {
+  .hero {
+    padding-top: 78px;
+    padding-bottom: 30px;
+  }
+
+  .hero-layout {
+    gap: 14px;
+  }
+
+  .hero-illustration {
+    max-width: 300px;
+    height: 235px;
+    min-height: 235px;
+  }
+
+  .student-image-container {
+    width: 155px;
+    max-width: 155px;
+    border-radius: 82px 82px 0 82px;
+    border-width: 4px;
+  }
+
+  .floating-card {
+    padding: 6px 9px;
+    gap: 6px;
+  }
+
+  .icon-box {
+    width: 25px;
+    height: 25px;
+    border-radius: 7px;
+  }
+
+  .icon-box svg {
+    width: 13px;
+    height: 13px;
+  }
+
+  .card-text {
+    font-size: 9.5px;
+  }
+
+  .count-num {
+    font-size: 12px;
+  }
+
+  .count-label {
+    font-size: 8.5px;
+  }
+
+  .card-easy-access {
+    top: 4px;
+    left: -8px;
+  }
+
+  .card-students {
+    right: -10px;
+    top: 44%;
+  }
+
+  .card-school {
+    bottom: 2px;
+    left: 2px;
+  }
+}
+

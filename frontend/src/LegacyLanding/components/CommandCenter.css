@@ -1,0 +1,196 @@
+.command-center-section {
+  padding: 100px 0;
+  background-color: transparent;
+  position: relative;
+}
+
+.cc-grid {
+  display: grid;
+  align-items: center;
+}
+
+/* Left Content */
+.cc-content {
+  max-width: 520px;
+}
+
+.cc-title {
+  font-size: 42px;
+  font-weight: 800;
+  background: linear-gradient(90deg, #7c3aed, #2563eb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 24px;
+  letter-spacing: -0.03em;
+}
+
+.cc-desc {
+  font-size: 16px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 40px;
+}
+
+/* Features List */
+.cc-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 40px;
+}
+
+.cc-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: white;
+  padding: 16px 24px;
+  border-radius: 12px;
+  border: 1px solid rgba(0,0,0,0.04);
+  box-shadow: 0 4px 15px rgba(0,0,0,0.02);
+}
+
+.cc-check-icon {
+  color: #7c3aed; /* Purple Check */
+}
+
+.cc-feature-text {
+  font-size: 15px;
+  font-weight: 600;
+  color: #334155;
+}
+
+/* Footer Pills */
+.cc-pills {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cc-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background: white;
+  border: 1px solid rgba(0,0,0,0.06);
+  border-radius: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #1e293b;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+}
+
+.cc-pill-icon {
+  color: #4f46e5;
+}
+
+/* Right Content: Chart Graphic */
+.cc-graphic {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cc-chart-card {
+  width: 100%;
+  max-width: 500px;
+  background: white;
+  border-radius: 24px;
+  padding: 32px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.06);
+  border: 1px solid rgba(0,0,0,0.03);
+}
+
+.cc-chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.cc-chart-title {
+  font-size: 18px;
+  font-weight: 800;
+  color: #1e293b;
+}
+
+.cc-chart-icon {
+  color: #4f46e5;
+}
+
+.cc-chart-body {
+  position: relative;
+  width: 100%;
+  height: 250px;
+  background: #f8fafc;
+  border-radius: 16px;
+  border: 1px solid #f1f5f9;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+.cc-chart-svg {
+  position: absolute;
+  bottom: 30px;
+  left: 0;
+  width: 100%;
+  height: calc(100% - 30px);
+}
+
+.cc-chart-labels {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 12px 20px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-weight: 600;
+  color: #64748b;
+  background: transparent;
+  z-index: 2;
+}
+
+@media (max-width: 768px) {
+  .command-center-section {
+    padding: 50px 0;
+  }
+  .cc-title {
+    font-size: clamp(26px, 6vw, 34px);
+    margin-bottom: 16px;
+  }
+  .cc-desc {
+    font-size: 15px;
+    margin-bottom: 28px;
+  }
+  .cc-feature-list {
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+  .cc-feature-item {
+    padding: 12px 16px;
+    border-radius: 10px;
+  }
+  .cc-feature-text {
+    font-size: 14px;
+  }
+  .cc-chart-card {
+    padding: 20px 16px;
+    border-radius: 18px;
+  }
+  .cc-chart-header {
+    margin-bottom: 20px;
+  }
+  .cc-chart-title {
+    font-size: 16px;
+  }
+  .cc-chart-body {
+    height: 180px;
+  }
+}
+
+
+

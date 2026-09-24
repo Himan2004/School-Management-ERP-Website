@@ -1,0 +1,272 @@
+.school-groups-section {
+  padding: 120px 0;
+  background-color: transparent;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Ambient Background Glows */
+.school-groups-section::before {
+  content: '';
+  position: absolute;
+  top: 10%; right: -5%;
+  width: 600px; height: 600px;
+  background: radial-gradient(circle, rgba(124, 58, 237, 0.06) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.school-groups-section::after {
+  content: '';
+  position: absolute;
+  bottom: -10%; left: 0%;
+  width: 700px; height: 700px;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.05) 0%, transparent 70%);
+  border-radius: 50%;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.school-groups-grid {
+  display: grid;
+  align-items: center;
+}
+
+/* Left Content */
+.sg-content {
+  max-width: 540px;
+  position: relative;
+  z-index: 1;
+}
+
+.sg-title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 46px;
+  font-weight: 800;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+  background: linear-gradient(135deg, #6d28d9 0%, #2563eb 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  line-height: 1.15;
+}
+
+.sg-desc {
+  font-size: 17px;
+  line-height: 1.6;
+  color: #475569;
+  margin-bottom: 48px;
+}
+
+/* Features List */
+.sg-feature-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.sg-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  padding: 24px 32px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.03), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255,255,255,0.4);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  cursor: default;
+}
+
+.sg-feature-item:hover {
+  transform: translateX(10px);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  border-color: rgba(124, 58, 237, 0.1);
+}
+
+.sg-feature-icon-wrapper {
+  width: 56px;
+  height: 56px;
+  min-width: 56px;
+  background: linear-gradient(135deg, #f3e8ff 0%, #e0e7ff 100%);
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #7c3aed;
+  box-shadow: 0 8px 16px rgba(124, 58, 237, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.sg-feature-item:hover .sg-feature-icon-wrapper {
+  transform: scale(1.1) rotate(5deg);
+}
+
+.sg-feature-text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sg-feature-title {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 18px;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.sg-feature-sub {
+  font-size: 15px;
+  color: #64748b;
+  line-height: 1.5;
+}
+
+/* Right Content: Bento Graphic */
+.sg-graphic {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 2;
+}
+
+.sg-bento-container {
+  background: rgba(255, 255, 255, 0.4);
+  backdrop-filter: blur(32px);
+  -webkit-backdrop-filter: blur(32px);
+  padding: 32px;
+  border-radius: 32px;
+  box-shadow: 0 30px 60px rgba(0,0,0,0.05), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255,255,255, 0.5);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
+  max-width: 540px;
+  position: relative;
+}
+
+.sg-bento-container::before {
+  content: '';
+  position: absolute;
+  top: -20px; left: -20px;
+  width: 100px; height: 100px;
+  background: linear-gradient(135deg, #7c3aed 0%, transparent 100%);
+  opacity: 0.1;
+  border-radius: 50%;
+  filter: blur(20px);
+}
+
+.sg-bento-top {
+  display: grid;
+}
+
+.sg-bento-card {
+  background: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(255,255,255, 1);
+  border-radius: 24px;
+  padding: 40px 32px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.02);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.sg-bento-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: linear-gradient(135deg, rgba(124, 58, 237, 0.05) 0%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+.sg-bento-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(124, 58, 237, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 1);
+  background: white;
+  border-color: rgba(124, 58, 237, 0.2);
+}
+
+.sg-bento-card:hover::after {
+  opacity: 1;
+}
+
+.bento-wide {
+  width: 100%;
+}
+
+.bento-icon {
+  color: #7c3aed;
+  transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), color 0.4s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.sg-bento-card:hover .bento-icon {
+  transform: scale(1.2) translateY(-2px);
+  color: #2563eb;
+}
+
+.bento-label {
+  font-family: var(--font-heading, 'Outfit', sans-serif);
+  font-size: 16px;
+  font-weight: 700;
+  color: #1e293b;
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 768px) {
+  .school-groups-section {
+    padding: 60px 0;
+  }
+  .sg-title {
+    font-size: clamp(26px, 6vw, 34px);
+    margin-bottom: 16px;
+  }
+  .sg-desc {
+    font-size: 15px;
+    margin-bottom: 32px;
+  }
+  .sg-feature-list {
+    gap: 16px;
+  }
+  .sg-feature-item {
+    padding: 16px 20px;
+    gap: 16px;
+    border-radius: 16px;
+  }
+  .sg-feature-icon-wrapper {
+    width: 48px;
+    height: 48px;
+    min-width: 48px;
+    border-radius: 12px;
+  }
+  .sg-feature-title {
+    font-size: 16px;
+  }
+  .sg-feature-sub {
+    font-size: 13.5px;
+  }
+  .sg-bento-container {
+    padding: 20px;
+    border-radius: 24px;
+  }
+  .sg-bento-card {
+    padding: 28px 20px;
+    border-radius: 18px;
+  }
+}
+
+
+

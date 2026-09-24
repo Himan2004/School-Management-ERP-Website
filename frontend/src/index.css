@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@layer base {
+  body {
+    @apply bg-background text-slate-800 dark:bg-slate-950 dark:text-slate-100 font-sans m-0 p-0 transition-colors duration-300;
+  }
+}
+
+@layer components {
+  /* EnhancedDashCard wave parallax effects */
+  .wave-card {
+    --wx1: -30%; --wy1: -40%;
+    --wx2: -20%; --wy2: -30%;
+    --wx3: -40%; --wy3: -25%;
+  }
+
+  .wave-layer {
+    @apply absolute inset-0 rounded-[24px] opacity-0 transition-opacity duration-500 pointer-events-none;
+    background-size: 200% 200%;
+    mix-blend-mode: overlay;
+  }
+  
+  .wave-card:hover .wave-layer {
+    @apply opacity-100;
+  }
+
+  .wave-l1 {
+    background: radial-gradient(circle at var(--wx1) var(--wy1), rgba(255,255,255,0.15) 0%, transparent 60%);
+    z-index: 1;
+  }
+  .wave-l2 {
+    background: radial-gradient(circle at var(--wx2) var(--wy2), rgba(255,255,255,0.1) 0%, transparent 50%);
+    z-index: 2;
+  }
+  .wave-l3 {
+    background: radial-gradient(circle at var(--wx3) var(--wy3), rgba(255,255,255,0.05) 0%, transparent 70%);
+    z-index: 3;
+  }
+
+  .silver-shiny-border {
+    position: relative;
+  }
+  .silver-shiny-border::before {
+    content: "";
+    @apply absolute inset-0 rounded-[24px] p-[1px] pointer-events-none opacity-50;
+    background: linear-gradient(135deg, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 50%, rgba(255,255,255,0.2) 100%);
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+  }
+}
+
+/* ── Heading component keyframes ────────────────────────────────────────────── */
+/* halfSquareMove — slow drift of the background polygon in the header banner   */
+@keyframes halfSquareMove {
+  0%   { transform: translate(0,    0)    rotate(0deg);   }
+  25%  { transform: translate(10px, -8px) rotate(3deg);   }
+  50%  { transform: translate(5px,  12px) rotate(-2deg);  }
+  75%  { transform: translate(-8px, 4px)  rotate(1deg);   }
+  100% { transform: translate(0,    0)    rotate(0deg);   }
+}
+
+/* dropRipple1/2/3 — soft glowing blobs that pulse behind the heading text     */
+@keyframes dropRipple1 {
+  0%,100% { transform: scale(1)   translate(0,    0);    opacity: 0.30; }
+  33%     { transform: scale(1.1) translate(8px,  -6px); opacity: 0.45; }
+  66%     { transform: scale(0.9) translate(-4px, 8px);  opacity: 0.20; }
+}
+@keyframes dropRipple2 {
+  0%,100% { transform: scale(1)   translate(0,    0);    opacity: 0.20; }
+  40%     { transform: scale(1.15) translate(-10px, 5px); opacity: 0.30; }
+  70%     { transform: scale(0.9) translate(6px,  -8px); opacity: 0.15; }
+}
+@keyframes dropRipple3 {
+  0%,100% { transform: scale(1)   translate(0,   0);    opacity: 0.15; }
+  50%     { transform: scale(1.2) translate(4px, 10px); opacity: 0.25; }
+}
+
+/* squareOrbit1/2 — two rotating border squares in the top-right of the header */
+@keyframes squareOrbit1 {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+@keyframes squareOrbit2 {
+  from { transform: rotate(0deg)   scale(1); }
+  50%  { transform: rotate(180deg) scale(1.1); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+  body {
+    margin: 0;
+    padding: 0;
+  }
+  body * {
+    visibility: hidden;
+  }
+  .printable-timetable-wrapper, .printable-timetable-wrapper * {
+    visibility: visible;
+  }
+  .printable-timetable-wrapper {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+  }
+  #tc-document, #tc-document * {
+    visibility: visible;
+  }
+  #tc-document {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    transform-origin: center center;
+    width: 210mm;
+    height: 297mm;
+    box-sizing: border-box;
+    margin: 0;
+    background: white;
+  }
+  .print-hidden, .print-hidden * {
+    display: none !important;
+  }
+}

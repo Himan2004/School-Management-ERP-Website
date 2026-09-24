@@ -1,0 +1,1118 @@
+import { useState, memo, useCallback } from "react";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
+import { createPortal } from "react-dom";
+import {
+  BarChart2,
+  Bell,
+  Briefcase,
+  Building2,
+  ChevronDown,
+  ClipboardList,
+  CreditCard,
+  Database,
+  DollarSign,
+  FileText,
+  FolderOpen,
+  GitBranch,
+  Globe,
+  HelpCircle,
+  History,
+  LayoutDashboard,
+  LifeBuoy,
+  LogOut,
+  MessageSquare,
+  Megaphone,
+  PhoneCall,
+  PieChart,
+  Receipt,
+  Settings,
+  ShieldAlert,
+  Target,
+  Ticket,
+  TrendingUp,
+  UserCheck,
+  Users,
+  Webhook,
+  Activity,
+  User2,
+} from "lucide-react";
+import logo from "../assets/Graphura_Logo.webp";
+
+// ─────────────────────────────────────────────────────────────────────────────
+// MENU REGISTRY
+// ─────────────────────────────────────────────────────────────────────────────
+const MENUS = {
+  "super-admin": {
+    title: "Super Admin",
+    initials: "SA",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/super-admin/",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Management",
+        items: [
+          { name: "Admins", path: "/super-admin/admins", icon: ShieldAlert },
+          {
+            name: "Announcement",
+            path: "/super-admin/announcements",
+            icon: Megaphone,
+          },
+          {
+            name: "Queries",
+            path: "/super-admin/queries",
+            icon: MessageSquare,
+          },
+        ],
+      },
+      {
+        label: "System",
+        items: [
+          {
+            name: "Login Logs",
+            path: "/super-admin/login-logs",
+            icon: History,
+          },
+          { name: "Support", path: "/super-admin/support", icon: LifeBuoy },
+        ],
+      },
+    ],
+  },
+  admin: {
+    title: "Admin",
+    initials: "AD",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/admin",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Operations",
+        items: [
+          { name: "User Management", path: "/admin/users", icon: Users },
+          {
+            name: "Leads & Sales",
+            icon: TrendingUp,
+            children: [
+              { name: "Leads", path: "/admin/leads", icon: Target },
+              { name: "Sales", path: "/admin/sales", icon: PieChart },
+            ],
+          },
+          { name: "Projects", path: "/admin/projects", icon: FolderOpen },
+          { name: "HRM", path: "/admin/hrm", icon: UserCheck },
+          { name: "Announcements", path: "/admin/announcements", icon: Megaphone },
+        ],
+      },
+      {
+        label: "Finance & Reports",
+        items: [
+          { name: "Finance", path: "/admin/finance", icon: Briefcase },
+          { name: "Reports", path: "/admin/reports", icon: BarChart2 },
+        ],
+      },
+      {
+        label: "Settings",
+        items: [
+          { name: "Support", path: "/admin/support", icon: LifeBuoy },
+          { name: "API Config", path: "/admin/api-config", icon: Webhook },
+        ],
+      },
+      {
+        label: "Help",
+        items: [
+          { name: "How to Use", path: "/how-to-use", icon: HelpCircle, external: true },
+        ],
+      },
+    ],
+  },
+  "sales-manager": {
+    title: "Sales Manager",
+    initials: "SM",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/sales-manager",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Sales",
+        items: [
+          { name: "Leads", path: "/sales-manager/leads", icon: Target },
+          { name: "Teams", path: "/sales-manager/teams", icon: Users },
+          {
+            name: "Employees",
+            path: "/sales-manager/employees",
+            icon: UserCheck,
+          },
+        ],
+      },
+      {
+        label: "Management",
+        items: [
+          { name: "HRM", path: "/sales-manager/hrm", icon: ClipboardList },
+          { name: "Support", path: "/sales-manager/support", icon: LifeBuoy },
+          {
+            name: "Announcements",
+            path: "/sales-manager/announcements",
+            icon: MessageSquare,
+          },
+          { name: "Logs", path: "/sales-manager/logs", icon: History },
+        ],
+      },
+      {
+        label: "Performance",
+        items: [
+          {
+            name: "Performance",
+            path: "/sales-manager/performance",
+            icon: TrendingUp,
+          },
+          { name: "Reports", path: "/sales-manager/reports", icon: BarChart2 },
+        ],
+      },
+    ],
+  },
+  "sales-team-leader": {
+    title: "Team Leader",
+    initials: "TL",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/sales-team-leader",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Sales",
+        items: [
+          { name: "Leads", path: "/sales-team-leader/leads", icon: Target },
+          { name: "My Team", path: "/sales-team-leader/my-team", icon: Users },
+          { name: "Tickets", path: "/sales-team-leader/tickets", icon: Ticket },
+        ],
+      },
+      {
+        label: "Performance",
+        items: [
+          {
+            name: "Targets",
+            path: "/sales-team-leader/targets",
+            icon: TrendingUp,
+          },
+          {
+            name: "Reports",
+            path: "/sales-team-leader/reports",
+            icon: BarChart2,
+          },
+        ],
+      },
+      {
+        label: "Personal",
+        items: [
+          { name: "HRM", path: "/sales-team-leader/hrm", icon: UserCheck },
+          {
+            name: "Login Logs",
+            path: "/sales-team-leader/login-logs",
+            icon: History,
+          },
+        ],
+      },
+      {
+        label: "Communication",
+        items: [
+          {
+            name: "Announcements",
+            path: "/sales-team-leader/communication",
+            icon: MessageSquare,
+          },
+        ],
+      },
+    ],
+  },
+  "sales-executive": {
+    title: "Sales Executive",
+    initials: "SE",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/sales-executive",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Leads",
+        items: [
+          {
+            name: "Leads",
+            path: "/sales-executive/leads",
+            icon: Target,
+            children: [
+              {
+                name: "All Leads",
+                path: "/sales-executive/leads/all",
+                icon: Target,
+              },
+              {
+                name: "My Prospects",
+                path: "/sales-executive/leads/prospects",
+                icon: ClipboardList,
+              },
+              {
+                name: "Follow Ups",
+                path: "/sales-executive/leads/follow-ups",
+                icon: PieChart,
+              },
+              {
+                name: "Dump Data",
+                path: "/sales-executive/leads/dump",
+                icon: Database,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: "Performance",
+        items: [
+          {
+            name: "My Target",
+            path: "/sales-executive/my-target",
+            icon: Target,
+          },
+        ],
+      },
+      {
+        label: "Personal",
+        items: [
+          {
+            name: "My Login Logs",
+            path: "/sales-executive/login-logs",
+            icon: History,
+          },
+        ],
+      },
+      {
+        label: "Management",
+        items: [
+          { name: "HRM", path: "/sales-executive/hrm", icon: UserCheck },
+          { name: "Support", path: "/sales-executive/support", icon: LifeBuoy },
+        ],
+      },
+    ],
+  },
+  finance: {
+    title: "Finance",
+    initials: "FN",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/finance",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Finance",
+        items: [
+          { name: "Clients", path: "/finance/clients", icon: User2 },
+          { name: "Payments", path: "/finance/payments", icon: CreditCard },
+          {
+            name: "Work Orders",
+            path: "/finance/work-orders",
+            icon: ClipboardList,
+          },
+          { name: "Invoices", path: "/finance/invoices", icon: FileText },
+          { name: "Expenses", path: "/finance/expenses", icon: Receipt },
+          {
+            name: "Global Payment",
+            path: "/finance/global-payment",
+            icon: Globe,
+          },
+        ],
+      },
+      {
+        label: "Management",
+        items: [
+          {
+            name: "Notifications",
+            path: "/finance/notifications",
+            icon: MessageSquare,
+          },
+          { name: "Login Logs", path: "/finance/logs", icon: History },
+          { name: "HRM", path: "/finance/hrm", icon: UserCheck },
+          { name: "Support", path: "/finance/support", icon: LifeBuoy },
+        ],
+      },
+    ],
+  },
+  "management-manager": {
+    title: "Management Manager",
+    initials: "MM",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/management-manager",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Operations",
+        items: [
+          {
+            name: "Work Orders",
+            path: "/management-manager/work-orders",
+            icon: ClipboardList,
+          },
+          {
+            name: "Projects",
+            path: "/management-manager/projects",
+            icon: FolderOpen,
+          },
+          { name: "Teams", path: "/management-manager/teams", icon: Users },
+          {
+            name: "Clients",
+            path: "/management-manager/clients",
+            icon: Briefcase,
+          },
+        ],
+      },
+      {
+        label: "Performance",
+        items: [
+          {
+            name: "Reports",
+            path: "/management-manager/reports",
+            icon: BarChart2,
+          },
+        ],
+      },
+      {
+        label: "Support",
+        items: [
+          {
+            name: "Tickets",
+            path: "/management-manager/tickets",
+            icon: Ticket,
+          },
+          {
+            name: "Announcements",
+            path: "/management-manager/announcements",
+            icon: MessageSquare,
+          },
+        ],
+      },
+      {
+        label: "Personal",
+        items: [
+          { name: "HRM", path: "/management-manager/hrm", icon: UserCheck },
+          {
+            name: "Login Logs",
+            path: "/management-manager/login-logs",
+            icon: History,
+          },
+          {
+            name: "Profile",
+            path: "/management-manager/profile",
+            icon: Settings,
+          },
+        ],
+      },
+    ],
+  },
+  "management-employee": {
+    title: "Management Employee",
+    initials: "ME",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/management-employee",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Work",
+        items: [
+          {
+            name: "My Projects",
+            path: "/management-employee/my-projects",
+            icon: FolderOpen,
+          },
+        ],
+      },
+      {
+        label: "Planning",
+        items: [
+          {
+            name: "Deadlines",
+            path: "/management-employee/deadlines",
+            icon: ClipboardList,
+          },
+          {
+            name: "Reminders",
+            path: "/management-employee/reminders",
+            icon: Bell,
+          },
+          {
+            name: "Performance",
+            path: "/management-employee/performance",
+            icon: TrendingUp,
+          },
+        ],
+      },
+      {
+        label: "Support",
+        items: [
+          {
+            name: "Tickets",
+            path: "/management-employee/tickets",
+            icon: Ticket,
+          },
+        ],
+      },
+      {
+        label: "Personal",
+        items: [
+          {
+            name: "HRM",
+            path: "/management-employee/hrm",
+            icon: UserCheck,
+          },
+          {
+            name: "Login Logs",
+            path: "/management-employee/login-logs",
+            icon: History,
+          },
+          {
+            name: "Profile",
+            path: "/management-employee/profile",
+            icon: Settings,
+          },
+        ],
+      },
+    ],
+  },
+  "management-team-leader": {
+    title: "Management Team Leader",
+    initials: "ML",
+    sections: [
+      {
+        label: "Overview",
+        items: [
+          {
+            name: "Dashboard",
+            path: "/management-team-leader",
+            icon: LayoutDashboard,
+            end: true,
+          },
+        ],
+      },
+      {
+        label: "Work",
+        items: [
+          {
+            name: "Projects",
+            path: "/management-team-leader/projects",
+            icon: FolderOpen,
+          },
+          { name: "Teams", path: "/management-team-leader/teams", icon: Users },
+        ],
+      },
+      {
+        label: "Insights",
+        items: [
+          {
+            name: "Reports",
+            path: "/management-team-leader/reports",
+            icon: BarChart2,
+          },
+        ],
+      },
+      {
+        label: "Management",
+        items: [
+          {
+            name: "Support",
+            path: "/management-team-leader/support",
+            icon: LifeBuoy,
+          },
+          { name: "HRM", path: "/management-team-leader/hrm", icon: UserCheck },
+          {
+            name: "Login Logs",
+            path: "/management-team-leader/login-logs",
+            icon: History,
+          },
+          {
+            name: "Notifications",
+            path: "/management-team-leader/notifications",
+            icon: Bell,
+          },
+          {
+            name: "Announcements",
+            path: "/management-team-leader/announcements",
+            icon: MessageSquare,
+          },
+        ],
+      },
+      {
+        label: "Personal",
+        items: [
+          {
+            name: "Profile",
+            path: "/management-team-leader/profile",
+            icon: Settings,
+          },
+        ],
+      },
+    ],
+  },
+};
+
+function useRole() {
+  const { pathname } = useLocation();
+  // Order matters — more specific prefixes must come before shorter ones
+  const roles = [
+    "super-admin",
+    "admin",
+    "sales-manager",
+    "sales-team-leader",
+    "sales-executive",
+    "finance",
+    "management-team-leader",
+    "management-manager",
+    "management-employee",
+    "client",
+  ];
+  return roles.find((r) => pathname.startsWith(`/${r}`)) ?? "admin";
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// TOOLTIP — CSS-only, zero JS state
+// ─────────────────────────────────────────────────────────────────────────────
+function Tooltip({ label, children }) {
+  return (
+    <div className="relative group/tip w-full flex justify-center">
+      {children}
+      <div
+        className="pointer-events-none absolute left-full top-1/2 -translate-y-1/2 ml-3 z-[200]
+                      opacity-0 translate-x-1
+                      group-hover/tip:opacity-100 group-hover/tip:translate-x-0
+                      transition-[opacity,transform] duration-150 whitespace-nowrap"
+      >
+        <div className="bg-[#0f172a] text-white text-xs font-medium px-3 py-1.5 rounded-lg shadow-xl ring-1 ring-white/10">
+          {label}
+        </div>
+        <div className="absolute right-full top-1/2 -translate-y-1/2 border-4 border-transparent border-r-[#0f172a]" />
+      </div>
+    </div>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NAV ITEM
+// ─────────────────────────────────────────────────────────────────────────────
+const NavItem = memo(function NavItem({
+  item,
+  expanded,
+  onExpand,
+  onNavClick,
+}) {
+  const Icon = item.icon;
+  const location = useLocation();
+
+  const handleClick = useCallback(() => {
+    if (!expanded && onExpand) onExpand();
+    if (onNavClick) onNavClick();
+  }, [expanded, onExpand, onNavClick]);
+
+  const isAdminsActive =
+    item.path === "/super-admin/admins" &&
+    (location.pathname === "/super-admin/departments" ||
+      location.pathname === "/super-admin/company");
+
+  // ── External link (opens in new tab) ──────────────────────────────────────
+  if (item.external) {
+    const baseClass = expanded
+      ? `group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] font-medium transition-all duration-150 text-slate-400 hover:bg-white/6 hover:text-slate-200`
+      : `relative flex items-center justify-center w-10 h-10 rounded-xl mx-auto transition-all duration-150 text-slate-500 hover:bg-white/6 hover:text-slate-300`;
+
+    const inner = expanded ? (
+      <>
+        <span className="flex-shrink-0 text-slate-500 group-hover:text-slate-300 transition-colors duration-150">
+          <Icon size={17} />
+        </span>
+        <span>{item.name}</span>
+        <span className="ml-auto opacity-40">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <path d="M1.5 8.5L8.5 1.5M8.5 1.5H3.5M8.5 1.5V6.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+          </svg>
+        </span>
+      </>
+    ) : (
+      <Icon size={17} />
+    );
+
+    const anchor = (
+      <a
+        href={item.path}
+        target="_blank"
+        rel="noopener noreferrer"
+        onClick={handleClick}
+        className={baseClass}
+      >
+        {inner}
+      </a>
+    );
+
+    return expanded ? anchor : <Tooltip label={item.name}>{anchor}</Tooltip>;
+  }
+
+  if (expanded) {
+    return (
+      <NavLink
+        to={item.path}
+        end={item.end ?? false}
+        onClick={handleClick}
+        className={({ isActive }) => {
+          const active = isActive || isAdminsActive;
+          return `group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-[13.5px] font-medium transition-all duration-150 ${
+            active
+              ? "bg-white/10 text-white shadow-sm"
+              : "text-slate-400 hover:bg-white/6 hover:text-slate-200"
+          }`;
+        }}
+      >
+        {({ isActive }) => {
+          const active = isActive || isAdminsActive;
+          return (
+            <>
+              {/* Left accent bar */}
+              <span
+                className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-r-full transition-all duration-200 ${
+                  active ? "h-5 bg-[#38bdf8]" : "h-0 bg-transparent"
+                }`}
+              />
+              <span
+                className={`flex-shrink-0 transition-colors duration-150 ${active ? "text-[#38bdf8]" : "text-slate-500 group-hover:text-slate-300"}`}
+              >
+                <Icon size={17} />
+              </span>
+              <span>{item.name}</span>
+            </>
+          );
+        }}
+      </NavLink>
+    );
+  }
+
+  return (
+    <Tooltip label={item.name}>
+      <NavLink
+        to={item.path}
+        end={item.end ?? false}
+        onClick={handleClick}
+        className={({ isActive }) => {
+          const active = isActive || isAdminsActive;
+          return `relative flex items-center justify-center w-10 h-10 rounded-xl mx-auto transition-all duration-150 ${
+            active
+              ? "bg-white/10 text-[#38bdf8]"
+              : "text-slate-500 hover:bg-white/6 hover:text-slate-300"
+          }`;
+        }}
+      >
+        {({ isActive }) => {
+          const active = isActive || isAdminsActive;
+          return (
+            <>
+              <span
+                className={`absolute left-0 top-1/2 -translate-y-1/2 w-[3px] rounded-r-full transition-all duration-200 ${active ? "h-5 bg-[#38bdf8]" : "h-0"}`}
+              />
+              <Icon size={17} />
+            </>
+          );
+        }}
+      </NavLink>
+    </Tooltip>
+  );
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// NAV GROUP (collapsible)
+// ─────────────────────────────────────────────────────────────────────────────
+const NavGroup = memo(function NavGroup({
+  group,
+  expanded,
+  onExpand,
+  onNavClick,
+}) {
+  const { pathname } = useLocation();
+  const isGroupActive = group.children.some((c) => pathname.startsWith(c.path));
+  const [open, setOpen] = useState(isGroupActive);
+  const Icon = group.icon;
+
+  const handleTrigger = useCallback(() => {
+    if (!expanded && onExpand) {
+      onExpand();
+      setOpen(true);
+    } else {
+      setOpen((v) => !v);
+    }
+  }, [expanded, onExpand]);
+
+  const trigger = (
+    <button
+      onClick={handleTrigger}
+      className={`group relative flex w-full items-center gap-3 rounded-xl py-2.5 text-[13.5px] font-medium transition-all duration-150
+        ${expanded ? "px-3" : "justify-center w-10 h-10 mx-auto px-0"}
+        ${isGroupActive ? "bg-white/10 text-white" : "text-slate-400 hover:bg-white/6 hover:text-slate-200"}`}
+    >
+      {isGroupActive && (
+        <span className="absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 bg-[#38bdf8] rounded-r-full" />
+      )}
+      <span
+        className={`flex-shrink-0 transition-colors duration-150 ${isGroupActive ? "text-[#38bdf8]" : "text-slate-500 group-hover:text-slate-300"}`}
+      >
+        <Icon size={17} />
+      </span>
+      {expanded && (
+        <>
+          <span className="flex-1 text-left">{group.name}</span>
+          <ChevronDown
+            size={15}
+            className="text-slate-500"
+            style={{
+              transform: open ? "rotate(180deg)" : "rotate(0deg)",
+              transition: "transform 250ms cubic-bezier(0.4,0,0.2,1)",
+            }}
+          />
+        </>
+      )}
+    </button>
+  );
+
+  return (
+    <div>
+      {expanded ? trigger : <Tooltip label={group.name}>{trigger}</Tooltip>}
+
+      {expanded && (
+        <div
+          style={{
+            display: "grid",
+            gridTemplateRows: open ? "1fr" : "0fr",
+            transition: "grid-template-rows 260ms cubic-bezier(0.4,0,0.2,1)",
+          }}
+        >
+          <div style={{ minHeight: 0, overflow: "hidden" }}>
+            <div className="ml-4 mt-1 space-y-0.5 border-l border-white/8 pl-3 pb-1">
+              {group.children.map((child) => {
+                const ChildIcon = child.icon;
+                return (
+                  <NavLink
+                    key={child.path}
+                    to={child.path}
+                    onClick={onNavClick ?? undefined}
+                    className={({ isActive }) =>
+                      `flex items-center gap-3 rounded-xl px-3 py-2 text-[13px] font-medium transition-all duration-150 ${
+                        isActive
+                          ? "bg-white/10 text-white"
+                          : "text-slate-500 hover:bg-white/6 hover:text-slate-300"
+                      }`
+                    }
+                  >
+                    {({ isActive }) => (
+                      <>
+                        <ChildIcon
+                          size={14}
+                          className={`flex-shrink-0 ${isActive ? "text-[#38bdf8]" : ""}`}
+                        />
+                        <span>{child.name}</span>
+                      </>
+                    )}
+                  </NavLink>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+});
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SECTION LABEL
+// ─────────────────────────────────────────────────────────────────────────────
+function SectionLabel({ label, expanded }) {
+  if (!expanded) {
+    return <div className="my-2 mx-auto w-6 border-t border-white/10" />;
+  }
+  return (
+    <p className="mt-4 mb-1.5 px-3 text-[10.5px] font-semibold uppercase tracking-widest text-slate-600 select-none">
+      {label}
+    </p>
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LOGOUT HELPERS
+// ─────────────────────────────────────────────────────────────────────────────
+
+/** Determine the correct login redirect based on stored session data */
+function getLoginRoute() {
+  try {
+    if (sessionStorage.getItem("superAdmin") || sessionStorage.getItem("accessToken") === null) {
+      const sa = sessionStorage.getItem("superAdmin");
+      if (sa) return "/super-admin-login";
+    }
+    const admin = sessionStorage.getItem("admin");
+    if (admin) return "/admin-login";
+
+    const user = sessionStorage.getItem("user");
+    if (user) {
+      const parsed = JSON.parse(user);
+      const role = parsed?.role?.toUpperCase?.() || "";
+      if (role === "SUPER_ADMIN") return "/super-admin-login";
+      if (role === "ADMIN") return "/admin-login";
+    }
+    // All department roles (sales, finance, management) → /login
+    return "/login";
+  } catch {
+    return "/login";
+  }
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// LOGOUT CONFIRMATION MODAL
+// ─────────────────────────────────────────────────────────────────────────────
+function LogoutModal({ onConfirm, onCancel, isLoggingOut }) {
+  return createPortal(
+    <div className="fixed inset-0 z-[10000] flex items-center justify-center p-4">
+      {/* Backdrop */}
+      <div
+        className="fixed inset-0 bg-slate-900/60 backdrop-blur-sm"
+        onClick={onCancel}
+      />
+
+      {/* Modal card */}
+      <div className="relative z-10 w-full max-w-sm bg-white rounded-3xl shadow-2xl p-6 flex flex-col gap-5">
+        {/* Icon + message */}
+        <div className="flex flex-col items-center gap-3 pt-2">
+          <div className="w-14 h-14 rounded-2xl bg-rose-50 border border-rose-200 flex items-center justify-center">
+            <LogOut size={26} className="text-rose-500" />
+          </div>
+          <p className="text-base font-black text-[#2a465a] text-center">
+            Confirm Logout
+          </p>
+          <p className="text-sm text-slate-500 text-center leading-relaxed">
+            Are you sure you want to sign out? You will be redirected to the
+            login page.
+          </p>
+        </div>
+
+        {/* Action buttons */}
+        <div className="flex gap-3">
+          <button
+            onClick={onCancel}
+            disabled={isLoggingOut}
+            className="flex-1 py-2.5 rounded-2xl border border-slate-200 text-slate-600 text-sm font-bold hover:bg-slate-50 transition active:scale-95 disabled:opacity-50"
+          >
+            Cancel
+          </button>
+          <button
+            onClick={onConfirm}
+            disabled={isLoggingOut}
+            className="flex-1 py-2.5 rounded-2xl bg-rose-500 text-white text-sm font-bold hover:bg-rose-600 transition active:scale-95 shadow-md shadow-rose-500/20 disabled:opacity-60 disabled:cursor-not-allowed"
+          >
+            {isLoggingOut ? "Signing out…" : "Logout"}
+          </button>
+        </div>
+      </div>
+    </div>,
+    document.body,
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// SIDEBAR
+// ─────────────────────────────────────────────────────────────────────────────
+function Sidebar({ expanded, onExpand, onNavClick }) {
+  const role = useRole();
+  const menu = MENUS[role] ?? MENUS.admin;
+  const navigate = useNavigate();
+
+  const [showLogoutModal, setShowLogoutModal] = useState(false);
+  const [isLoggingOut, setIsLoggingOut] = useState(false);
+
+  const stableOnExpand   = useCallback(() => onExpand?.(),   [onExpand]);
+  const stableOnNavClick = useCallback(() => onNavClick?.(), [onNavClick]);
+
+  const handleLogoutConfirm = useCallback(async () => {
+    setIsLoggingOut(true);
+    try {
+      const loginRoute = getLoginRoute();
+      // Clear all session / local storage
+      sessionStorage.clear();
+      localStorage.clear();
+      navigate(loginRoute, { replace: true });
+    } finally {
+      setIsLoggingOut(false);
+      setShowLogoutModal(false);
+    }
+  }, [navigate]);
+
+  return (
+    <div className="flex h-full w-full flex-col bg-[#1a2e3f] pb-3 font-sans rounded-r-lg">
+      {/* ── Logo ── */}
+      <div
+        className={`flex items-center border-b border-white/8 ${expanded ? "px-2 py-1.5 gap-3" : "justify-center py-3.5"}`}
+      >
+        {expanded ? (
+          <div className="bg-white rounded-lg w-full h-14">
+            <img
+              src={logo}
+              alt="Graphura"
+              className="flex-shrink-0 h-full w-full object-contain"
+            />
+          </div>
+        ) : (
+          <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-white shadow-md select-none flex-shrink-0">
+            <span className="text-2xl font-extrabold bg-gradient-to-br from-sky-400 via-blue-500 to-violet-600 bg-clip-text text-transparent leading-none">
+              G
+            </span>
+          </div>
+        )}
+      </div>
+
+      {/* ── Nav ── */}
+      <nav
+        className="flex-1 overflow-y-auto overflow-x-hidden sidebar-scroll"
+        style={{
+          paddingLeft: expanded ? "0.625rem" : "0.375rem",
+          paddingRight: expanded ? "0.625rem" : "0.375rem",
+          paddingTop: "0.5rem",
+        }}
+      >
+        {menu.sections.map((section, si) => (
+          <div key={si}>
+            <SectionLabel label={section.label} expanded={expanded} />
+            <div className="space-y-0.5">
+              {section.items.map((item) =>
+                item.children ? (
+                  <NavGroup
+                    key={item.name}
+                    group={item}
+                    expanded={expanded}
+                    onExpand={stableOnExpand}
+                    onNavClick={stableOnNavClick}
+                  />
+                ) : (
+                  <NavItem
+                    key={item.path}
+                    item={item}
+                    expanded={expanded}
+                    onExpand={stableOnExpand}
+                    onNavClick={stableOnNavClick}
+                  />
+                ),
+              )}
+            </div>
+          </div>
+        ))}
+      </nav>
+
+      {/* ── Footer / User card ── */}
+      <div
+        className={`mt-auto border-t border-white/6 ${expanded ? "px-3 pt-3" : "px-2 pt-3 flex justify-center"}`}
+      >
+        {expanded ? (
+          <button
+            type="button"
+            onClick={() => setShowLogoutModal(true)}
+            style={{ opacity: 1, transition: "opacity 150ms ease" }}
+            className="w-full flex items-center gap-3 rounded-xl bg-white/5 px-3 py-2.5 hover:bg-rose-500/10 transition-colors duration-150 cursor-pointer group"
+          >
+            <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 text-xs font-bold text-white shadow-sm">
+              {menu.initials}
+            </div>
+            <div className="flex-1 min-w-0 text-left">
+              <p className="text-[13px] font-semibold text-slate-200 truncate">
+                {menu.title}
+              </p>
+              <p className="text-[11px] text-slate-500 truncate">
+                Active session
+              </p>
+            </div>
+            <LogOut
+              size={14}
+              className="text-slate-600 group-hover:text-rose-400 transition-colors flex-shrink-0"
+            />
+          </button>
+        ) : (
+          <Tooltip label="Logout">
+            <button
+              type="button"
+              onClick={() => setShowLogoutModal(true)}
+              className="flex h-9 w-9 items-center justify-center rounded-xl bg-gradient-to-br from-sky-400 to-blue-600 text-xs font-bold text-white shadow-sm cursor-pointer hover:from-rose-400 hover:to-rose-600 transition-all duration-200"
+            >
+              {menu.initials}
+            </button>
+          </Tooltip>
+        )}
+      </div>
+
+      {/* Logout confirmation modal */}
+      {showLogoutModal && (
+        <LogoutModal
+          onConfirm={handleLogoutConfirm}
+          onCancel={() => setShowLogoutModal(false)}
+          isLoggingOut={isLoggingOut}
+        />
+      )}
+    </div>
+  );
+}
+
+export default memo(Sidebar);

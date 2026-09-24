@@ -1,0 +1,344 @@
+.comp-modules-section {
+  padding: 100px 0;
+  background-color: transparent;
+  position: relative;
+}
+
+.comp-modules-header {
+  text-align: left;
+  max-width: 800px;
+  margin-bottom: 60px;
+}
+
+/* Badge Style */
+.comp-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 6px 16px;
+  border-radius: var(--radius-full);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.05em;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.comp-title {
+  font-size: 48px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: var(--text-dark);
+  margin-bottom: 20px;
+  letter-spacing: -0.02em;
+}
+
+.comp-subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-medium);
+}
+
+/* Bento Grid */
+.comp-modules-grid {
+  display: grid;
+}
+
+/* Base Card Styles */
+.comp-card {
+  position: relative;
+  background: white;
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.015);
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 380px;
+}
+
+.comp-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+}
+
+
+
+/* Top Accent Line */
+.card-top-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+}
+
+.card-student .card-top-line { background-color: #3b82f6; }
+.card-attendance .card-top-line { background-color: #a855f7; }
+.card-exams .card-top-line { background-color: #f97316; }
+.card-parent .card-top-line { background-color: #f43f5e; }
+.card-fees .card-top-line { background-color: #10b981; }
+.card-hr .card-top-line { background-color: #64748b; }
+
+/* Icon wrappers */
+.card-icon-wrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  transition: transform 0.3s ease;
+}
+
+.comp-card:hover .card-icon-wrapper {
+  transform: scale(1.08);
+}
+
+.icon-blue { background-color: rgba(59, 130, 246, 0.08); color: #3b82f6; }
+.icon-purple { background-color: rgba(168, 85, 247, 0.08); color: #a855f7; }
+.icon-orange { background-color: rgba(249, 115, 22, 0.08); color: #f97316; }
+.icon-red { background-color: rgba(244, 63, 94, 0.08); color: #f43f5e; }
+.icon-green { background-color: rgba(16, 185, 129, 0.08); color: #10b981; }
+.icon-slate { background-color: rgba(100, 116, 139, 0.08); color: #64748b; }
+
+/* Text Content */
+.comp-card-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+  letter-spacing: -0.01em;
+}
+
+.comp-card-desc {
+  font-size: 15px;
+  line-height: 1.6;
+  color: var(--text-medium);
+  margin-bottom: 24px;
+}
+
+/* Bullet footer details */
+.card-footer-bullet {
+  margin-top: auto;
+  font-size: 14px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.bullet-point {
+  font-size: 20px;
+  line-height: 1;
+}
+
+.bullet-purple { color: #8b5cf6; }
+.bullet-orange { color: #f97316; }
+.bullet-red { color: #ef4444; }
+.bullet-green { color: #10b981; }
+
+/* --- VISUAL GRAPHICS --- */
+.visual-graphic {
+  background-color: #f8fafc;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  width: 100%;
+  padding: 16px;
+  margin-top: auto; /* Push it to the bottom */
+}
+
+/* Student Dashboard Mockup */
+.student-dashboard-graphic {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mock-window-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 1px solid #e2e8f0;
+  padding-bottom: 8px;
+}
+
+.window-dots {
+  display: flex;
+  gap: 6px;
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+.dot-red { background-color: #ef4444; }
+.dot-yellow { background-color: #f59e0b; }
+.dot-green { background-color: #10b981; }
+
+.mock-window-title {
+  font-size: 11px;
+  font-weight: 600;
+  color: #94a3b8;
+  letter-spacing: 0.02em;
+}
+
+.mock-dashboard-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  text-align: left;
+}
+
+.stat-block {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.stat-value {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+.text-blue { color: #2563eb; }
+.text-green { color: #16a34a; }
+.text-dark { color: #1e293b; }
+
+.stat-label {
+  font-size: 10px;
+  font-weight: 600;
+  color: #64748b;
+  white-space: nowrap;
+}
+
+/* Payroll Mockup */
+.payroll-graphic {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.mock-payroll-header {
+  font-size: 11px;
+  font-weight: 700;
+  color: #64748b;
+  letter-spacing: 0.05em;
+  text-align: left;
+}
+
+.mock-payroll-rows {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.payroll-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #334155;
+}
+
+.row-label {
+  width: 90px;
+  text-align: left;
+}
+
+.progress-bar-container {
+  flex: 1;
+  height: 8px;
+  background-color: #e2e8f0;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background-color: #0284c7; /* blue-ish */
+  border-radius: 4px;
+}
+
+.fill-80 { width: 80%; }
+.fill-20 { width: 20%; }
+
+.row-value {
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.payroll-divider {
+  height: 1px;
+  background-color: #e2e8f0;
+}
+
+.payroll-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 14px;
+  font-weight: 700;
+  color: #64748b;
+}
+
+.total-value {
+  color: #0f172a;
+  font-size: 15px;
+}
+
+@media (max-width: 768px) {
+  .comp-modules-section {
+    padding: 50px 0;
+  }
+  .comp-modules-header {
+    margin-bottom: 36px;
+  }
+  .comp-title {
+    font-size: clamp(26px, 6vw, 34px);
+    margin-bottom: 12px;
+  }
+  .comp-subtitle {
+    font-size: 15px;
+  }
+  .comp-card {
+    padding: 24px 20px;
+    min-height: auto;
+    border-radius: 16px;
+  }
+  .comp-card-title {
+    font-size: 18px;
+  }
+  .comp-card-desc {
+    font-size: 14px;
+    margin-bottom: 16px;
+  }
+  .mock-dashboard-stats {
+    gap: 8px;
+  }
+  .stat-value {
+    font-size: 15px;
+  }
+  .stat-label {
+    font-size: 9px;
+  }
+  .payroll-row {
+    gap: 8px;
+    font-size: 12px;
+  }
+  .row-label {
+    width: 80px;
+  }
+}
+
+
+

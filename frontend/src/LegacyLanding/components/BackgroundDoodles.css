@@ -1,0 +1,112 @@
+.bg-doodles-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0; /* Keep behind interactive elements */
+  pointer-events: none; /* Never interfere with clicks */
+  overflow: hidden;
+}
+
+/* Base Doodle Styles */
+.doodle-item {
+  position: absolute;
+  opacity: 0.08; /* Slightly more visible */
+  filter: blur(1.5px); /* Soft focus */
+  transform: rotate(var(--rot, 0deg));
+}
+
+/* Individual Doodle Positions & Colors */
+
+.doodle-atom {
+  top: 5%;
+  left: -80px;
+  color: #3b82f6;
+  --rot: -15deg;
+}
+
+.doodle-flask {
+  top: 12%;
+  right: -60px;
+  color: #a855f7;
+  --rot: 10deg;
+}
+
+.doodle-compass {
+  top: 22%;
+  left: -60px;
+  color: #f97316;
+  --rot: 25deg;
+}
+
+.doodle-dna {
+  top: 30%;
+  right: -70px;
+  color: #10b981;
+  --rot: -30deg;
+}
+
+.doodle-infinity {
+  top: 40%;
+  left: -50px;
+  color: #f43f5e;
+  --rot: 5deg;
+}
+
+.doodle-telescope {
+  top: 48%;
+  right: -80px;
+  color: #64748b;
+  --rot: 40deg;
+}
+
+.doodle-brain {
+  top: 55%;
+  left: -70px;
+  color: #3b82f6;
+  --rot: -10deg;
+}
+
+.doodle-microscope {
+  top: 65%;
+  right: -60px;
+  color: #a855f7;
+  --rot: 15deg;
+}
+
+.doodle-calc {
+  top: 75%;
+  left: -50px;
+  color: #f97316;
+  --rot: -20deg;
+}
+
+.doodle-globe {
+  top: 85%;
+  right: -70px;
+  color: #10b981;
+  --rot: 10deg;
+}
+
+.doodle-shapes {
+  top: 92%;
+  left: -60px;
+  color: #f43f5e;
+  --rot: 30deg;
+}
+
+.doodle-binary {
+  top: 98%;
+  right: -40px;
+  color: #64748b;
+  --rot: -5deg;
+}
+
+/* Responsive Hide for tiny screens to avoid layout shift issues */
+@media (max-width: 480px) {
+  .doodle-item {
+    opacity: 0.03;
+    transform: scale(0.7);
+  }
+}

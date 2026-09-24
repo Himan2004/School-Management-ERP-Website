@@ -1,0 +1,254 @@
+.stakeholders-section {
+  padding: 100px 0;
+  background-color: transparent;
+  position: relative;
+}
+
+.stakeholders-header {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto 60px;
+}
+
+.stakeholders-title {
+  font-size: 42px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-dark);
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.stakeholders-subtitle {
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--text-medium);
+}
+
+/* 5-Column Grid */
+.stakeholders-grid {
+  display: grid;
+}
+
+/* Card Style */
+.stakeholder-card {
+  position: relative;
+  border-radius: 24px;
+  padding: 32px 24px;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border: 1px solid rgba(255, 255, 255, 1);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.03), inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.stakeholder-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+  border-radius: 24px 24px 0 0;
+}
+
+.stakeholder-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+}
+
+/* Header Row inside card */
+.card-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 28px;
+}
+
+/* Icon Box inside card */
+.role-icon-box {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease;
+}
+
+.stakeholder-card:hover .role-icon-box {
+  transform: scale(1.1);
+}
+
+/* Role Badge inside card */
+.role-badge {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  padding: 4px 10px;
+  border-radius: 8px;
+  border: 1px solid;
+}
+
+/* Role Titles & Desc */
+.role-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: var(--text-dark);
+  margin-bottom: 12px;
+}
+
+.role-desc {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--text-medium);
+  text-align: left;
+}
+
+/* Color Themes per Role Card */
+
+/* 1. Super Admin (Yellow) */
+.role-admin {
+  background: linear-gradient(180deg, rgba(245, 158, 11, 0.02) 0%, #ffffff 100%);
+  border-top: 1px solid rgba(245, 158, 11, 0.1);
+}
+.role-admin::before {
+  background-color: #f59e0b;
+}
+.role-admin .role-icon-box {
+  background-color: rgba(245, 158, 11, 0.05);
+  color: #d97706;
+}
+.role-admin .role-badge {
+  color: #d97706;
+  border-color: rgba(245, 158, 11, 0.2);
+  background-color: rgba(245, 158, 11, 0.02);
+}
+.role-admin:hover {
+  border-color: rgba(245, 158, 11, 0.2);
+}
+
+/* 2. Principal (Blue) */
+.role-principal {
+  background: linear-gradient(180deg, rgba(59, 130, 246, 0.02) 0%, #ffffff 100%);
+  border-top: 1px solid rgba(59, 130, 246, 0.1);
+}
+.role-principal::before {
+  background-color: #3b82f6;
+}
+.role-principal .role-icon-box {
+  background-color: rgba(59, 130, 246, 0.05);
+  color: #2563eb;
+}
+.role-principal .role-badge {
+  color: #2563eb;
+  border-color: rgba(59, 130, 246, 0.2);
+  background-color: rgba(59, 130, 246, 0.02);
+}
+.role-principal:hover {
+  border-color: rgba(59, 130, 246, 0.2);
+}
+
+/* 3. Teacher (Green) */
+.role-teacher {
+  background: linear-gradient(180deg, rgba(16, 185, 129, 0.02) 0%, #ffffff 100%);
+  border-top: 1px solid rgba(16, 185, 129, 0.1);
+}
+.role-teacher::before {
+  background-color: #10b981;
+}
+.role-teacher .role-icon-box {
+  background-color: rgba(16, 185, 129, 0.05);
+  color: #059669;
+}
+.role-teacher .role-badge {
+  color: #059669;
+  border-color: rgba(16, 185, 129, 0.2);
+  background-color: rgba(16, 185, 129, 0.02);
+}
+.role-teacher:hover {
+  border-color: rgba(16, 185, 129, 0.2);
+}
+
+/* 4. Parent (Purple) */
+.role-parent {
+  background: linear-gradient(180deg, rgba(139, 92, 246, 0.02) 0%, #ffffff 100%);
+  border-top: 1px solid rgba(139, 92, 246, 0.1);
+}
+.role-parent::before {
+  background-color: #8b5cf6;
+}
+.role-parent .role-icon-box {
+  background-color: rgba(139, 92, 246, 0.05);
+  color: #7c3aed;
+}
+.role-parent .role-badge {
+  color: #7c3aed;
+  border-color: rgba(139, 92, 246, 0.2);
+  background-color: rgba(139, 92, 246, 0.02);
+}
+.role-parent:hover {
+  border-color: rgba(139, 92, 246, 0.2);
+}
+
+/* 5. Student (Pink) */
+.role-student {
+  background: linear-gradient(180deg, rgba(244, 63, 94, 0.02) 0%, #ffffff 100%);
+  border-top: 1px solid rgba(244, 63, 94, 0.1);
+}
+.role-student::before {
+  background-color: #f43f5e;
+}
+.role-student .role-icon-box {
+  background-color: rgba(244, 63, 94, 0.05);
+  color: #e11d48;
+}
+.role-student .role-badge {
+  color: #e11d48;
+  border-color: rgba(244, 63, 94, 0.2);
+  background-color: rgba(244, 63, 94, 0.02);
+}
+.role-student:hover {
+  border-color: rgba(244, 63, 94, 0.2);
+}
+
+@media (max-width: 768px) {
+  .stakeholders-section {
+    padding: 50px 0;
+  }
+  .stakeholders-header {
+    margin-bottom: 36px;
+  }
+  .stakeholders-title {
+    font-size: clamp(24px, 6vw, 32px);
+    margin-bottom: 10px;
+  }
+  .stakeholders-subtitle {
+    font-size: 15px;
+  }
+  .stakeholder-card {
+    padding: 24px 20px;
+    min-height: auto;
+    border-radius: 18px;
+  }
+  .card-header-row {
+    margin-bottom: 20px;
+  }
+  .role-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .role-desc {
+    font-size: 13.5px;
+  }
+}
+
+
+

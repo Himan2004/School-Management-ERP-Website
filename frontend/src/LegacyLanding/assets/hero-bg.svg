@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 900" width="100%" height="100%" style="background: #ebf0fb; overflow: hidden;">
+  <defs>
+    <!-- Pattern for dotted circle -->
+    <pattern id="dotPattern" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="2" fill="#d0dcf2" />
+    </pattern>
+
+    <!-- Sparkle path -->
+    <g id="sparkle">
+      <path d="M10,0 C10,5 5,10 0,10 C5,10 10,15 10,20 C10,15 15,10 20,10 C15,10 10,5 10,0 Z" fill="#b9cbf0"/>
+    </g>
+
+    <!-- Blur filter for soft blobs -->
+    <filter id="softBlur" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="80" />
+    </filter>
+  </defs>
+
+  <!-- Big white soft blobs -->
+  <circle cx="1100" cy="400" r="300" fill="#ffffff" filter="url(#softBlur)" opacity="0.8"/>
+  <circle cx="200" cy="200" r="250" fill="#ffffff" filter="url(#softBlur)" opacity="0.5"/>
+
+  <!-- Top left Concentric Diamonds -->
+  <g transform="translate(100, -50) rotate(45)">
+    <rect x="-100" y="-100" width="200" height="200" fill="none" stroke="#d0dcf2" stroke-width="2"/>
+    <rect x="-130" y="-130" width="260" height="260" fill="none" stroke="#d0dcf2" stroke-width="2"/>
+    <rect x="-160" y="-160" width="320" height="320" fill="none" stroke="#d0dcf2" stroke-width="2"/>
+    <rect x="-190" y="-190" width="380" height="380" fill="none" stroke="#d0dcf2" stroke-width="2"/>
+    <rect x="-220" y="-220" width="440" height="440" fill="none" stroke="#d0dcf2" stroke-width="2"/>
+  </g>
+
+  <!-- Bottom Left Dotted Circle -->
+  <circle cx="-50" cy="800" r="250" fill="url(#dotPattern)" opacity="0.8"/>
+
+  <!-- Top Right Sparkles & Accents -->
+  <use href="#sparkle" x="1200" y="100" />
+  <use href="#sparkle" x="1350" y="250" transform="scale(0.8)"/>
+  
+  <circle cx="1250" cy="80" r="4" fill="#f5c35e"/>
+  <circle cx="1300" cy="180" r="6" fill="#b9cbf0"/>
+  <circle cx="1150" cy="200" r="5" fill="#f5c35e"/>
+
+  <!-- Semi-circle with dashes at top right -->
+  <path d="M 1440 0 A 200 200 0 0 0 1240 200" fill="none" stroke="#d0dcf2" stroke-width="2" stroke-dasharray="10, 10"/>
+  <path d="M 1440 0 A 230 230 0 0 0 1210 230" fill="none" stroke="#d0dcf2" stroke-width="1.5" stroke-dasharray="6, 8"/>
+
+</svg>

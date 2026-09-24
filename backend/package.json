@@ -1,0 +1,33 @@
+{
+  "name": "school-management-backend",
+  "version": "1.0.0",
+  "description": "School Management System Backend",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js utils/graphuraAdmin.seeder.js",
+    "dev": "nodemon --signal SIGTERM server.js"
+  },
+  "dependencies": {
+    "@getbrevo/brevo": "^5.0.4",
+    "axios": "^1.13.6",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^1.41.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.6",
+    "crypto": "^1.0.1",
+    "date-fns": "^4.1.0",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1",
+    "express-validator": "^7.3.1",
+    "jsonwebtoken": "^9.0.3",
+    "mongoose": "^7.8.9",
+    "multer": "^2.1.1",
+    "multer-storage-cloudinary": "^4.0.0",
+    "razorpay": "^2.9.6",
+    "sib-api-v3-sdk": "^8.5.0"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}

@@ -1,0 +1,20 @@
+import express from "express";
+import {
+  createTask,
+  getAllTasks,
+  updateTask,
+  deleteTask,
+} from "../../controllers/admin/taskController.js";
+import { protect } from "../../middleware/authMiddleware.js";
+
+const router = express.Router();
+
+// All task routes are protected and for admins only
+router.use(protect);
+
+router.post("/", createTask);
+router.get("/", getAllTasks);
+router.put("/:id", updateTask);
+router.delete("/:id", deleteTask);
+
+export default router;
